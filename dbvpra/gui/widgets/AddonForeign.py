@@ -13,7 +13,7 @@ import numpy as np
 from PySide2.QtGui import QPainter, QImage
 
 from dbvpra.assert_util import assert_rgba_image
-from dbvpra.gui.widgets.util import Q, Np2Q
+from dbvpra.gui.widgets.util import Q, Np2Q, Q2Np
 
 
 class AddonForeign:
@@ -70,7 +70,7 @@ class AddonForeign:
 
         self.on_foreign_changed()
 
-    def foreign_rgba_image(self) -> np.ndarray:
+    def _foreign_image(self) -> QImage:
         nx = self._foreign_x_max + 1
         ny = self._foreign_y_max + 1
         image = Q.rgba_image_generate(nx, ny)
@@ -78,6 +78,16 @@ class AddonForeign:
         self.foreign_paint(painter)
         painter.end()
         return image
+
+    def foreign_rgb_image(self) -> np.ndarray:
+        image = self._foreign_image()
+        return Q2Np.rgb_image(image)
+
+    def foreign_mask(self) -> np.ndarray:
+        mask = self._foreign_image()
+        mask = Q2Np.a_image(mask)
+        mask = mask != 0.0
+        return mask
 
     def foreign_paint(self, painter: QPainter):
         painter.drawImage(self._foreign_x, self._foreign_y, self._foreign)

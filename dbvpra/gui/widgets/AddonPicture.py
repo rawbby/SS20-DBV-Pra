@@ -12,7 +12,7 @@
 import numpy as np
 from PySide2.QtGui import QPainter, QImage
 
-from dbvpra.gui.widgets.util import Q, Q2Np
+from dbvpra.gui.widgets.util import Q, Q2Np, Np2Q
 
 
 class AddonPicture:
@@ -31,6 +31,10 @@ class AddonPicture:
 
     def picture_rgb_image(self) -> np.ndarray:
         return Q2Np.rgb_image(self._picture)
+
+    def picture_set_rgb_image(self, image: np.ndarray):
+        self._picture = Np2Q.rgb_image(image)
+        self.on_picture_changed(self._picture)
 
     def picture_width(self) -> int:
         return self._picture.width()

@@ -15,6 +15,7 @@ from PySide2.QtCore import QUrl
 from PySide2.QtWidgets import QMainWindow, QFileDialog, QWidget
 
 from dbvpra.gui.Ui_window import Ui_window
+from dbvpra.inpainting import poisson
 from dbvpra.segmentation import nn_segmentation_from_masks
 
 
@@ -44,29 +45,12 @@ class Control_window:
         kernel_size = 3
 
         def on_inpaint(checked):
-            # TODO implement
+            image = ui.merge.picture_rgb_image()
+            foreign = ui.merge.foreign_rgb_image()
+            mask = ui.merge.foreign_mask()
 
-            # iw = ui.merge._image.width()
-            # ih = ui.merge._image.height()
-
-            # fx = ui.merge._foreign_pos.x()
-            # fy = ui.merge._foreign_pos.y()
-            # fw = ui.merge._foreign.width()
-            # fh = ui.merge._foreign.height()
-
-            # x = max(0, fx)
-            # y = max(0, fy)
-            # w = min(iw, fx + fw) - x
-            # h = min(ih, fy + fh) - y
-
-            # image = q_image_to_np_image(ui.merge._image)[x:w + x, y:h + y]
-            # foreign = q_image_to_np_image(ui.merge._foreign)[x:w + x, y:h + y]
-            # mask = alpha_view(ui.merge._foreign)[x:w + x, y:h + y].reshape(w, h)
-
-            # self._poisson = poisson(image, foreign, mask)
-            # self._poisson_calculated = True
-
-            return
+            image_ = poisson(image, foreign, mask)
+            ui.merge.picture_set_rgb_image(image_)
 
         def on_embed(checked):
             np_mask = ui.scribble.canvas_primary_mask()
