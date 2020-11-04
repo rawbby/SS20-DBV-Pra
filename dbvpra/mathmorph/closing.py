@@ -10,31 +10,31 @@
 
 import numpy as np
 
-from dbvpra.assert_util import assert_source, assert_kernel
+from dbvpra.assert_util import assert_mask, assert_kernel
 
 
-def closing(source: np.ndarray, kernel: np.ndarray):
+def closing(mask: np.ndarray, kernel: np.ndarray):
     """
-    :param source: the source image to close
+    :param mask: the source image to close
     :param kernel: the kernel used to close the source
     :return: the closed source
     """
 
-    assert_source(source)
+    assert_mask(mask)
     assert_kernel(kernel)
 
     """1. Invent some aliases for the algorithm"""
     kernel_size = kernel.shape[0]
-    (width, height) = source.shape
+    (width, height) = mask.shape
 
     """2. Pad the source for a more easy iteration"""
-    source = np.pad(source, kernel_size >> 1, mode='edge')
+    mask = np.pad(mask, kernel_size >> 1, mode='edge')
 
     """3. The algorithm"""
     destination = np.empty((width, height), np.bool_)
     for x in range(0, width):
         for y in range(0, height):
-            pat = source[x:x + kernel_size, y:y + kernel_size]
+            pat = mask[x:x + kernel_size, y:y + kernel_size]
             destination[x, y] = np.any(np.multiply(pat, kernel))
 
     return destination

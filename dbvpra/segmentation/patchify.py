@@ -10,7 +10,7 @@
 
 import numpy as np
 
-from dbvpra.assert_util import assert_image, assert_mask, assert_image_mask, assert_patch_size
+from dbvpra.assert_util import assert_rgb_image, assert_mask, assert_image_mask, assert_kernel_size
 
 
 def _patchify(image: np.ndarray, patch_size: int):
@@ -20,8 +20,8 @@ def _patchify(image: np.ndarray, patch_size: int):
     :return: The patches as two dimensional array
     """
 
-    assert_image(image)
-    assert_patch_size(patch_size, image)
+    assert_rgb_image(image)
+    assert_kernel_size(patch_size)
 
     patch_pad = patch_size >> 1
     patches_width = image.shape[0]
@@ -38,10 +38,10 @@ def _patchify(image: np.ndarray, patch_size: int):
     return patches
 
 
-def _patchify_info(image: np.ndarray, patch_size: int):
+def _patchify_info(image: np.ndarray, kernel_size: int):
     """
     :param image: The Image to patchify
-    :param patch_size: The size of the patches
+    :param kernel_size: The size of the patches
     :return: The patch info as two dimensional array
     """
 
@@ -49,9 +49,9 @@ def _patchify_info(image: np.ndarray, patch_size: int):
                    for x in range(0, image.shape[0])
                    for y in range(0, image.shape[1])]
 
-    patches = _patchify(image, patch_size)
+    patches = _patchify(image, kernel_size)
 
-    patches = patches.reshape((image.shape[0] * image.shape[1], patch_size * patch_size * 3))
+    patches = patches.reshape((image.shape[0] * image.shape[1], kernel_size * kernel_size * 3))
 
     return np.append(patches, coordinates, axis=1)
 

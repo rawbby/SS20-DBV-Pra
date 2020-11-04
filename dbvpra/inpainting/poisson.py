@@ -10,8 +10,8 @@
 
 import numpy as np
 
-from dbvpra.assert_util import assert_image, assert_mask, assert_image_mask
-from dbvpra.inpainting.util import _o, _d_hat, _lsqr, _vec, _unvec, _mask_bounds
+from dbvpra.assert_util import assert_rgb_image, assert_mask, assert_image_mask
+from dbvpra.inpainting.util import _o, _d_hat, _lsqr, _vec, _un_vec, _mask_bounds
 
 
 def poisson(image: np.ndarray, foreign: np.ndarray, mask: np.ndarray):
@@ -22,8 +22,8 @@ def poisson(image: np.ndarray, foreign: np.ndarray, mask: np.ndarray):
     :return: the poisson inpainted image
     """
 
-    assert_image(image)
-    assert_image(foreign)
+    assert_rgb_image(image)
+    assert_rgb_image(foreign)
     assert_mask(mask)
     assert_image_mask(image, mask)
     assert_image_mask(foreign, mask)
@@ -60,4 +60,4 @@ def poisson(image: np.ndarray, foreign: np.ndarray, mask: np.ndarray):
         vec_result[vec_mask, c] = _lsqr(a, b + b_add)
 
     vec_result = np.clip(vec_result, 0, 1)
-    return _unvec(vec_result, image.shape[0])
+    return _un_vec(vec_result, image.shape[0])

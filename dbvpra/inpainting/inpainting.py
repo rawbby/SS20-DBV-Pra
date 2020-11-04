@@ -10,8 +10,8 @@
 
 import numpy as np
 
-from dbvpra.assert_util import assert_image, assert_mask, assert_image_mask
-from dbvpra.inpainting.util import _o, _d_hat, _lsqr, _vec, _unvec, _mask_bounds
+from dbvpra.assert_util import assert_rgb_image, assert_mask, assert_image_mask
+from dbvpra.inpainting.util import _o, _d_hat, _lsqr, _vec, _un_vec, _mask_bounds
 
 
 def inpainting(image: np.ndarray, mask: np.ndarray):
@@ -21,7 +21,7 @@ def inpainting(image: np.ndarray, mask: np.ndarray):
     :return: the inpainted image
     """
 
-    assert_image(image)
+    assert_rgb_image(image)
     assert_mask(mask)
     assert_image_mask(image, mask)
 
@@ -57,7 +57,7 @@ def inpainting(image: np.ndarray, mask: np.ndarray):
     vec_result[vec_result < 0.0] = 0.0
     vec_result[vec_result > 1.0] = 1.0
 
-    return _unvec(vec_result, image.shape[0])
+    return _un_vec(vec_result, image.shape[0])
 
 # def inpainting1d(image: np.ndarray, mask: np.ndarray):
 #     """

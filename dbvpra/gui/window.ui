@@ -78,7 +78,7 @@
                 <addaction name="paint_undo"/>
                 <addaction name="paint_redo"/>
                 <addaction name="separator"/>
-                <addaction name="smart_fullfill"/>
+                <addaction name="smart_segment"/>
                 <addaction name="embed"/>
             </widget>
             <widget class="QMenu" name="menu_merge">
@@ -186,9 +186,9 @@
                 <string>Ctrl+C</string>
             </property>
         </action>
-        <action name="smart_fullfill">
+        <action name="smart_segment">
             <property name="text">
-                <string>Smart Fullfill</string>
+                <string>Smart Segment</string>
             </property>
             <property name="toolTip">
                 <string>Paint the Scribble using a Neural Network, trained by the current selection</string>

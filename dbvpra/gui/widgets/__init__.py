@@ -8,9 +8,9 @@
 #  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 #  SOFTWARE.
 
+from dbvpra.gui.widgets.AddonCanvas import *
+from dbvpra.gui.widgets.AddonPicture import *
 from dbvpra.gui.widgets.Merge import *
-from dbvpra.gui.widgets.QCanvas import *
-from dbvpra.gui.widgets.QImageWidget import *
 from dbvpra.gui.widgets.Scribble import *
 from dbvpra.gui.widgets.util import *
 

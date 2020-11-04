@@ -11,10 +11,11 @@
 from dbvpra.assert_util.util import *
 
 __all__ = [
-    'assert_source',
-    'assert_kernel',
-    'assert_image',
+    'assert_rgb_image',
+    'assert_rgba_image',
+    'assert_a_image',
     'assert_mask',
-    'assert_patch_size',
     'assert_image_mask',
+    'assert_kernel',
+    'assert_kernel_size',
 ]

@@ -5,7 +5,7 @@ The course was led by [Prof. Dr. Michael M&ouml;ller](https://www.vsa.informatik
 
 ## LICENSE
 
-See [LICENSE](./LICENSE)
+see [LICENSE](./LICENSE)
 
 ## Requirements
 

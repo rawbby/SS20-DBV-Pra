@@ -1,12 +1,11 @@
 .idea/*
 !.idea/codeStyles/
-!.idea/inspectionProfiles/
+!.idea/copyright/
 !.idea/runConfigurations/
 !.idea/*.iml
 !.idea/encodings.xml
 !.idea/modules.xml
 !.idea/vcs.xml
-cmake-build-*/
 
 __pycache__/
 .venv/

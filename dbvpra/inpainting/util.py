@@ -22,7 +22,7 @@ def _vec(matrix: np.ndarray):
     return matrix.reshape((nx * ny,) + matrix.shape[2:], order='F')
 
 
-def _unvec(matrix: np.ndarray, ny: int):
+def _un_vec(matrix: np.ndarray, ny: int):
     """
     :param matrix: the matrix to be vectorized
     :return: the vectorized matrix as view!

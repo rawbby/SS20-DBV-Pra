@@ -13,7 +13,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as f
 
-from dbvpra.assert_util import assert_image, assert_mask, assert_image_mask, assert_patch_size
+from dbvpra.assert_util import assert_rgb_image, assert_mask, assert_image_mask, assert_kernel_size
 from dbvpra.segmentation.patchify import _patchify_info
 
 
@@ -22,19 +22,19 @@ class _SegmentationNN(nn.Module):
     TODO document
     """
 
-    def __init__(self, patch_size: int):
+    def __init__(self, kernel_size: int):
         """
         TODO document
         """
 
         nn.Module.__init__(self)
 
-        assert_patch_size(patch_size)
+        assert_kernel_size(kernel_size)
         channel = 3
         coordinates = 2
 
-        inputs = (patch_size ** 2) * channel + coordinates
-        hidden = ((patch_size + 1) ** 2) * channel + coordinates
+        inputs = (kernel_size ** 2) * channel + coordinates
+        hidden = ((kernel_size + 1) ** 2) * channel + coordinates
         output = 1
 
         self.inputs = nn.Linear(inputs, hidden)
@@ -73,17 +73,17 @@ def _train_segmentation_nn(net: _SegmentationNN, inputs, labels, max_iterations=
             break
 
 
-def nn_segmentation_from_masks(image: np.ndarray, patch_size: int, keep_mask: np.ndarray, dump_mask: np.ndarray):
+def nn_segmentation_from_masks(image: np.ndarray, kernel_size: int, keep_mask: np.ndarray, dump_mask: np.ndarray):
     """
     :param image: The Image to segment from
-    :param patch_size: The Size of the patches
+    :param kernel_size: The Size of the Kernel
     :param keep_mask: The Mask of pixels to keep
     :param dump_mask: The Mask of pixels to dump
     :return: A Mask of pixels to keep.
              Pixels similar to keep_mask and different to to dump_pixels
     """
 
-    assert_image(image)
+    assert_rgb_image(image)
     assert_mask(keep_mask)
     assert_mask(dump_mask)
     assert_image_mask(image, keep_mask)
@@ -92,7 +92,7 @@ def nn_segmentation_from_masks(image: np.ndarray, patch_size: int, keep_mask: np
     ###
     # formatting the data
 
-    patch_info = _patchify_info(image, patch_size)
+    patch_info = _patchify_info(image, kernel_size)
 
     keep_info = patch_info[keep_mask.flatten()]
     dump_info = patch_info[dump_mask.flatten()]
@@ -109,7 +109,7 @@ def nn_segmentation_from_masks(image: np.ndarray, patch_size: int, keep_mask: np
     ###
     # training the network
 
-    net = _SegmentationNN(patch_size)
+    net = _SegmentationNN(kernel_size)
     _train_segmentation_nn(net, inputs, labels)
 
     ###

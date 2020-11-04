@@ -11,13 +11,52 @@
 import numpy as np
 
 
-def assert_source(source: np.ndarray):
+def assert_rgb_image(image: np.ndarray):
     """
-    :param source: the source to check for its properties
+    :param image: the image to check for its properties
     """
-    assert type(source) == np.ndarray, "The Source needs to be a numpy.ndarray!"
-    assert source.dtype == np.bool_, "The Source elements need to be a bool!"
-    assert len(source.shape) == 2, "The Source needs to have a dimension of two!"
+    assert type(image) == np.ndarray, "The Image needs to be a numpy.ndarray!"
+    assert image.dtype == np.float64, "The Image elements to be a float!"
+    assert len(image.shape) == 3, "The Image needs to have a dimension of three!"
+    assert image.shape[2] == 3, "The Image needs to have three color channels!"
+
+
+def assert_rgba_image(image: np.ndarray):
+    """
+    :param image: the image to check for its properties
+    """
+    assert type(image) == np.ndarray, "The Image needs to be a numpy.ndarray!"
+    assert image.dtype == np.float64, "The Image elements to be a float!"
+    assert len(image.shape) == 3, "The Image needs to have a dimension of three!"
+    assert image.shape[2] == 4, "The Image needs to have four color channels!"
+
+
+def assert_a_image(image: np.ndarray):
+    """
+    :param image: the image to check for its properties
+    """
+    assert type(image) == np.ndarray, "The Image needs to be a numpy.ndarray!"
+    assert image.dtype == np.float64, "The Image elements to be a float!"
+    assert len(image.shape) == 3, "The Image needs to have a dimension of three!"
+    assert image.shape[2] == 1, "The Image needs to have only one alpha channel!"
+
+
+def assert_mask(mask: np.ndarray):
+    """
+    :param mask: the mask to check for its properties
+    """
+    assert type(mask) == np.ndarray, "The Mask needs to be a numpy.ndarray!"
+    assert mask.dtype == np.bool_, "The Mask needs to be a bool mask!"
+    assert len(mask.shape) == 2, "The Mask needs to have a dimension of two!"
+
+
+def assert_image_mask(image: np.ndarray, mask: np.ndarray):
+    """
+    :param image: the image to check for its properties
+    :param mask: the mask to check for its properties
+    """
+    assert image.shape[0] == mask.shape[0], "The Image and Mask need to have the same width"
+    assert image.shape[1] == mask.shape[1], "The Image and Mask need to have the same height"
 
 
 def assert_kernel(kernel: np.ndarray):
@@ -31,43 +70,9 @@ def assert_kernel(kernel: np.ndarray):
     assert kernel.shape[0] & 1 == 1, "The Kernel needs to have an uneven size!"
 
 
-def assert_image(image: np.ndarray):
+def assert_kernel_size(kernel_size: int):
     """
-    :param image: the image to check for its properties
+    :param kernel_size: the mask to check for its properties
     """
-    assert type(image) == np.ndarray, "The Image needs to be a numpy.ndarray!"
-    assert image.dtype == np.float64, "The Image elements to be a float!"
-    assert len(image.shape) == 3, "The Image needs to have a dimension of three!"
-    assert image.shape[2] == 3, "The Image needs to have a three color channels!"
-
-
-def assert_mask(mask: np.ndarray):
-    """
-    :param mask: the mask to check for its properties
-    """
-    assert type(mask) == np.ndarray, "The Mask needs to be a numpy.ndarray!"
-    assert mask.dtype == np.bool_, "The Mask needs to be a bool mask!"
-    assert len(mask.shape) == 2, "The Mask needs to have a dimension of two!"
-
-
-def assert_patch_size(patch_size: int, image: np.ndarray = None):
-    """
-    :param patch_size: the mask to check for its properties
-    :param image: the image to use the patch on
-    """
-    assert patch_size & 1 == 1, "The patches need to have an uneven size! " \
-                                "This patch function is used for patches with a center! "
-    assert patch_size > 0, "The patches need to be bigger than zero to be meaningful!"
-
-    if image is not None:
-        assert patch_size <= image.shape[0], "The patches need to be smaller than the width of the Image!"
-        assert patch_size <= image.shape[1], "The patches need to be smaller than the height of the Image!"
-
-
-def assert_image_mask(image: np.ndarray, mask: np.ndarray):
-    """
-    :param image: the image to check for its properties
-    :param mask: the mask to check for its properties
-    """
-    assert image.shape[0] == mask.shape[0], "The Image and Mask need to have the same width"
-    assert image.shape[1] == mask.shape[1], "The Image and Mask need to have the same height"
+    assert kernel_size & 1 == 1, "The kernel needs to have an uneven size as it needs a center!"
+    assert kernel_size > 0, "The kernel needs to be bigger than zero to be meaningful!"
