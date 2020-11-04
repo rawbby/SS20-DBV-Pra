@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+    <class>window</class>
+    <widget class="QMainWindow" name="window">
+        <property name="geometry">
+            <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>624</width>
+                <height>341</height>
+            </rect>
+        </property>
+        <property name="minimumSize">
+            <size>
+                <width>624</width>
+                <height>341</height>
+            </size>
+        </property>
+        <property name="windowTitle">
+            <string>gui</string>
+        </property>
+        <widget class="QWidget" name="central">
+            <layout class="QGridLayout" name="grid">
+                <item row="0" column="0">
+                    <widget class="Scribble" name="scribble">
+                        <property name="minimumSize">
+                            <size>
+                                <width>300</width>
+                                <height>300</height>
+                            </size>
+                        </property>
+                        <property name="maximumSize">
+                            <size>
+                                <width>300</width>
+                                <height>300</height>
+                            </size>
+                        </property>
+                    </widget>
+                </item>
+                <item row="0" column="1">
+                    <widget class="Merge" name="merge">
+                        <property name="minimumSize">
+                            <size>
+                                <width>300</width>
+                                <height>300</height>
+                            </size>
+                        </property>
+                        <property name="maximumSize">
+                            <size>
+                                <width>300</width>
+                                <height>300</height>
+                            </size>
+                        </property>
+                    </widget>
+                </item>
+            </layout>
+        </widget>
+        <widget class="QMenuBar" name="menu_bar">
+            <property name="geometry">
+                <rect>
+                    <x>0</x>
+                    <y>0</y>
+                    <width>624</width>
+                    <height>21</height>
+                </rect>
+            </property>
+            <widget class="QMenu" name="menu_scribble">
+                <property name="title">
+                    <string>Scribble</string>
+                </property>
+                <addaction name="open_scribble"/>
+                <addaction name="separator"/>
+                <addaction name="paint_green"/>
+                <addaction name="paint_red"/>
+                <addaction name="erase"/>
+                <addaction name="paint_clear"/>
+                <addaction name="separator"/>
+                <addaction name="paint_undo"/>
+                <addaction name="paint_redo"/>
+                <addaction name="separator"/>
+                <addaction name="smart_fullfill"/>
+                <addaction name="embed"/>
+            </widget>
+            <widget class="QMenu" name="menu_merge">
+                <property name="title">
+                    <string>Merge</string>
+                </property>
+                <addaction name="open_merge"/>
+                <addaction name="separator"/>
+                <addaction name="inpaint"/>
+                <addaction name="separator"/>
+                <addaction name="save_merge"/>
+            </widget>
+            <addaction name="menu_scribble"/>
+            <addaction name="menu_merge"/>
+        </widget>
+        <action name="open_scribble">
+            <property name="text">
+                <string>Open</string>
+            </property>
+            <property name="toolTip">
+                <string>Load Scribble Image</string>
+            </property>
+            <property name="shortcut">
+                <string>Ctrl+O</string>
+            </property>
+        </action>
+        <action name="open_merge">
+            <property name="text">
+                <string>Open</string>
+            </property>
+            <property name="toolTip">
+                <string>Load Merge Image</string>
+            </property>
+            <property name="shortcut">
+                <string>Ctrl+Shift+O</string>
+            </property>
+        </action>
+        <action name="paint_green">
+            <property name="text">
+                <string>Paint (Green)</string>
+            </property>
+            <property name="toolTip">
+                <string>Paint (Green)</string>
+            </property>
+        </action>
+        <action name="paint_red">
+            <property name="text">
+                <string>Paint (Red)</string>
+            </property>
+        </action>
+        <action name="erase">
+            <property name="text">
+                <string>Erase</string>
+            </property>
+        </action>
+        <action name="paint_undo">
+            <property name="text">
+                <string>Paint Undo</string>
+            </property>
+            <property name="toolTip">
+                <string>Paint Undo</string>
+            </property>
+            <property name="shortcut">
+                <string>Ctrl+Z</string>
+            </property>
+        </action>
+        <action name="paint_redo">
+            <property name="text">
+                <string>Paint Redo</string>
+            </property>
+            <property name="shortcut">
+                <string>Ctrl+Y</string>
+            </property>
+        </action>
+        <action name="save_merge">
+            <property name="text">
+                <string>Save</string>
+            </property>
+            <property name="toolTip">
+                <string>Save Merge to Filesystem</string>
+            </property>
+            <property name="shortcut">
+                <string>Ctrl+S</string>
+            </property>
+        </action>
+        <action name="embed">
+            <property name="text">
+                <string>Embed</string>
+            </property>
+            <property name="toolTip">
+                <string>Embed the selected Scribble into Merge</string>
+            </property>
+            <property name="shortcut">
+                <string>Ctrl+E</string>
+            </property>
+        </action>
+        <action name="paint_clear">
+            <property name="text">
+                <string>Clear</string>
+            </property>
+            <property name="toolTip">
+                <string>Clear Paintings</string>
+            </property>
+            <property name="shortcut">
+                <string>Ctrl+C</string>
+            </property>
+        </action>
+        <action name="smart_fullfill">
+            <property name="text">
+                <string>Smart Fullfill</string>
+            </property>
+            <property name="toolTip">
+                <string>Paint the Scribble using a Neural Network, trained by the current selection</string>
+            </property>
+            <property name="shortcut">
+                <string>Ctrl+F</string>
+            </property>
+        </action>
+        <action name="inpaint">
+            <property name="text">
+                <string>Inpaint</string>
+            </property>
+            <property name="shortcut">
+                <string>Ctrl+I</string>
+            </property>
+        </action>
+    </widget>
+    <customwidgets>
+        <customwidget>
+            <class>Merge</class>
+            <extends>QLabel</extends>
+            <header>dbvpra.gui.widgets.Merge</header>
+            <container>1</container>
+        </customwidget>
+        <customwidget>
+            <class>Scribble</class>
+            <extends>QLabel</extends>
+            <header>dbvpra.gui.widgets.Scribble</header>
+            <container>1</container>
+        </customwidget>
+    </customwidgets>
+    <resources/>
+    <connections/>
+</ui>

@@ -1,0 +1,17 @@
+#  Copyright (c) 2020 Robert Andreas Fritsch
+#
+#  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+#  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+#  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+#  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+#  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+#  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+#  SOFTWARE.
+
+from dbvpra.gui.widgets.Merge import *
+from dbvpra.gui.widgets.QCanvas import *
+from dbvpra.gui.widgets.QImageWidget import *
+from dbvpra.gui.widgets.Scribble import *
+from dbvpra.gui.widgets.util import *
+
+__all__ = ['Merge', 'Scribble']
